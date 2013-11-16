@@ -1,0 +1,5 @@
+name: InventoryMenuAPI
+main: edu.vccs.email.amm28053.inventoryMenuAPI.InventoryMenuAPI
+version: 1.0-SNAPSHOT
+description: This is an API to enable developers to easily create and implement inventory menus in their plugins.
+author: amhokies
