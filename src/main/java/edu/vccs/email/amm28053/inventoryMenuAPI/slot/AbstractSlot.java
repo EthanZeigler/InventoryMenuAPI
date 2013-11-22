@@ -11,19 +11,12 @@ public abstract class AbstractSlot {
     private Material mat;
 
     /**
-     * No-arg constructor.
-     * Automatically assigns an ID and Material.
-     */
-    public AbstractSlot() {
-
-    }
-
-    /**
      * Creates a slot with the id passed in and default material.
      * @param id the id to assign to this slot.
      */
     public AbstractSlot(int id) {
         this.id = id;
+        this.mat = Material.BOOK;
     }
 
     /**
