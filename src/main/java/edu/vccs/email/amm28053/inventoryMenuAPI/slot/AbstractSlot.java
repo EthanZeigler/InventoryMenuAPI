@@ -89,19 +89,4 @@ public abstract class AbstractSlot {
 
         return desc;
     }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other)
-            return true;
-        else if (other == null || this.getClass() != other.getClass())
-            return false;
-        else
-            return id.equalsIgnoreCase(((AbstractSlot) other).getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

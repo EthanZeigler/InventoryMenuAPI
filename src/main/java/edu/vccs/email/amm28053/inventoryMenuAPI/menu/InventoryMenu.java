@@ -94,6 +94,11 @@ public class InventoryMenu {
         return slots.size() % 9 == 0 ? slots.size() : (slots.size() / 9 + 1) * 9;
     }
 
+    /**
+     * Builds and returns the InventoryMenu.
+     *
+     * @return the built inventory
+     */
     public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(null, getSize(), getName());
 

@@ -11,21 +11,23 @@ import java.util.Set;
 public class MenuHandler {
     private Set<InventoryMenu> menus;
 
+    /**
+     * Creates a MenuHandler to store InventoryMenus that
+     *  are registered and waiting for input.
+     */
     public MenuHandler() {
         menus = new HashSet<InventoryMenu>();
     }
 
+    /**
+     * Registers an InventoryMenu.
+     *
+     * @param menu the InventoryMenu to be registered
+     * @return true if successfully registered
+     */
     public boolean registerMenu(InventoryMenu menu) {
         Validate.isTrue(menu.getNumSlots() > 0, "InventoryMenu owned by [" + menu.getOwner().getName() + "]" +
             " failed registration! Reason: Menu is empty!");
         return menus.add(menu);
-    }
-
-    public boolean deregisterMenu(String menu) {
-        for(InventoryMenu im : menus) {
-            if(im.getName().equalsIgnoreCase(menu))
-                return menus.remove(im);
-        }
-        return false;
     }
 }
