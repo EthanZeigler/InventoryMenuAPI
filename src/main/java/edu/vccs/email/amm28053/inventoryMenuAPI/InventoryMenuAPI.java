@@ -3,11 +3,16 @@ package edu.vccs.email.amm28053.inventoryMenuAPI;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.InventoryMenu;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.MenuHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Set;
+
 /**
  * The InventoryMenuAPI plugin main class.
+ *
  * @author Alex Marshall
  */
 public class InventoryMenuAPI extends JavaPlugin {
@@ -29,35 +34,27 @@ public class InventoryMenuAPI extends JavaPlugin {
      *
      * @return instance of InventoryMenuAPI plugin
      */
-    public static Plugin getInstance() {
-        return Bukkit.getPluginManager().getPlugin("InventoryMenuAPI");
+    public static InventoryMenuAPI getInstance() {
+        return (InventoryMenuAPI) Bukkit.getPluginManager().getPlugin("InventoryMenuAPI");
     }
 
     /**
-     * Register a menu to the MenuHandler.
+     * Show an InventoryMenu to a Player.
      *
-     * @param menu the menu to register
-     * @param plugin the plugin that is registering the menu
+     * @param player the player to show the InventoryMenu to
      */
-    public void registerMenu(InventoryMenu menu, Plugin plugin) {
+    public void showInventoryMenu(Player player, InventoryMenu menu) {
         handler.registerMenu(menu);
+        player.openInventory(menu.getInventory());
     }
 
     /**
-     * Deregister a menu from the MenuHandler.
+     * Show an InventoryMenu to a given set of Players.
      *
-     * @param menu the InventoryMenu instance to deregister
+     * @param players the players to show the InventoryMenu to
      */
-    public void deregisterMenu(InventoryMenu menu) {
-        handler.deregisterMenu(menu.getName());
-    }
-
-    /**
-     * Deregister a menu from the MenuHandler.
-     *
-     * @param menu the name of the InventoryMenu to deregister
-     */
-    public void deregisterMenu(String menu) {
-        handler.deregisterMenu(menu);
+    public void showInventoryMenu(Set<Player> players, InventoryMenu menu) {
+        for(Player player : players)
+            showInventoryMenu(player, menu);
     }
 }

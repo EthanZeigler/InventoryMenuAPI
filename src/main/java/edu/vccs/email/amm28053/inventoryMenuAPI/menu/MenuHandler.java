@@ -15,10 +15,10 @@ public class MenuHandler {
         menus = new HashSet<InventoryMenu>();
     }
 
-    public void registerMenu(InventoryMenu menu) {
-        Validate.isTrue(menu.getSlots() > 0, "InventoryMenu owned by [" + menu.getOwner().getName() + "]" +
+    public boolean registerMenu(InventoryMenu menu) {
+        Validate.isTrue(menu.getNumSlots() > 0, "InventoryMenu owned by [" + menu.getOwner().getName() + "]" +
             " failed registration! Reason: Menu is empty!");
-        menus.add(menu);
+        return menus.add(menu);
     }
 
     public boolean deregisterMenu(String menu) {
