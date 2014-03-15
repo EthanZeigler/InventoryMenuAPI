@@ -1,11 +1,12 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI;
 
+import edu.vccs.email.amm28053.inventoryMenuAPI.listeners.InventoryCloseListener;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.InventoryMenu;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.MenuHandler;
+import edu.vccs.email.amm28053.inventoryMenuAPI.util.Debug;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Set;
@@ -22,6 +23,13 @@ public class InventoryMenuAPI extends JavaPlugin {
     @Override
     public void onEnable() {
         handler = new MenuHandler();
+        
+        saveDefaultConfig();
+        
+        Debug.log("Debugging is enabled. To disable, set the debug value in the "
+        		+ "InventoryMenuAPI config to false.");
+        
+        getServer().getPluginManager().registerEvents(new InventoryCloseListener(), this);
     }
 
     @Override
@@ -45,6 +53,9 @@ public class InventoryMenuAPI extends JavaPlugin {
      */
     public void showInventoryMenu(Player player, InventoryMenu menu) {
         handler.registerMenu(menu);
+        
+        menu.addViewer(player);
+        
         player.openInventory(menu.getInventory());
     }
 
