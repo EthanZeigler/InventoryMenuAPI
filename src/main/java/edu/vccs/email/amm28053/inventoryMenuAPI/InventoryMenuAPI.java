@@ -1,5 +1,7 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI;
 
+import java.util.Collection;
+
 import edu.vccs.email.amm28053.inventoryMenuAPI.listeners.InventoryCloseListener;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.InventoryMenu;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.MenuHandler;
@@ -8,8 +10,6 @@ import edu.vccs.email.amm28053.inventoryMenuAPI.util.Debug;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.Set;
 
 /**
  * The InventoryMenuAPI plugin main class.
@@ -52,12 +52,12 @@ public class InventoryMenuAPI extends JavaPlugin {
      *
      * @param player the player to show the InventoryMenu to
      */
-    public void showInventoryMenu(Player player, InventoryMenu menu) {
+    private void showInventoryMenu(Player player, InventoryMenu menu) {
         
     	if(handler.registerMenu(menu))
     		Debug.log("Registering menu: " + menu.getName());
         
-       // menu.addViewer(player);
+    	menu.addViewer(player);
         
         player.openInventory(menu.getInventory());
         
@@ -69,7 +69,7 @@ public class InventoryMenuAPI extends JavaPlugin {
      *
      * @param players the players to show the InventoryMenu to
      */
-    public void showInventoryMenu(Set<Player> players, InventoryMenu menu) {
+    public void showInventoryMenu(Collection<Player> players, InventoryMenu menu) {
         for(Player player : players)
             showInventoryMenu(player, menu);
     }

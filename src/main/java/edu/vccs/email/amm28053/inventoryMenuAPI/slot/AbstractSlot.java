@@ -1,6 +1,7 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI.slot;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public abstract class AbstractSlot {
     public AbstractSlot(String id) {
         this.id = id;
         this.mat = Material.DIAMOND;
+        this.description = "";
     }
 
     /**
@@ -37,7 +39,7 @@ public abstract class AbstractSlot {
      * @param mat the material representation of this slot
      */
     public AbstractSlot(String id, Material mat) {
-        this.id = id;
+        this(id);
         this.mat= mat;
     }
 
@@ -45,7 +47,7 @@ public abstract class AbstractSlot {
      * Method that will be executed when the slot is
      *  clicked on.
      */
-    public abstract void execute();
+    public abstract void execute(Player player);
 
     /**
      * Get the material representation of this slot.
