@@ -3,17 +3,13 @@ package edu.vccs.email.amm28053.inventoryMenuAPI.menu;
 import edu.vccs.email.amm28053.inventoryMenuAPI.slot.AbstractSlot;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A container for AbstractSlots.
@@ -26,7 +22,7 @@ public class InventoryMenu {
 	private final String name;
 
 	private List<AbstractSlot> slots;
-	private Set<String> viewers;
+	//private Set<String> viewers;
 	
 	private Inventory inventory;
 
@@ -42,7 +38,7 @@ public class InventoryMenu {
 		this.owner = owner;
 		this.name = name;
 		this.slots = new ArrayList<AbstractSlot>();
-		this.viewers = new HashSet<String>();
+		//this.viewers = new HashSet<String>();
 	}
 
 	/**
@@ -111,33 +107,33 @@ public class InventoryMenu {
 	 * 
 	 * @param player the player who is viewing the InventoryMenu.
 	 */
-	public void addViewer(Player player) {
-		viewers.add(player.getName());
-	}
+//	public void addViewer(Player player) {
+//		viewers.add(player.getName());
+//	}
 	
 	/**
 	 * Gets the viewers of this InventoryMenu instance.
 	 * 
 	 * @return the players who are viewing this InventoryMenu.
 	 */
-	public Set<Player> getViewers() {
-
-		Set<Player> playerViewers = new HashSet<Player>();
-		
-		Iterator<String> iterator = viewers.iterator();
-		while(iterator.hasNext()) {
-			String name = iterator.next();
-			
-			Player player = Bukkit.getPlayerExact(name);
-			
-			if(player == null) {
-				iterator.remove();
-				continue;
-			}
-			playerViewers.add(player);
-		}
-		return playerViewers;
-	}
+//	public Set<Player> getViewers() {
+//
+//		Set<Player> playerViewers = new HashSet<Player>();
+//		
+//		Iterator<String> iterator = viewers.iterator();
+//		while(iterator.hasNext()) {
+//			String name = iterator.next();
+//			
+//			Player player = Bukkit.getPlayerExact(name);
+//			
+//			if(player == null) {
+//				iterator.remove();
+//				continue;
+//			}
+//			playerViewers.add(player);
+//		}
+//		return playerViewers;
+//	}
 	
 	/**
 	 * Returns the cached Inventory object of this InventoryMenu if one exists.

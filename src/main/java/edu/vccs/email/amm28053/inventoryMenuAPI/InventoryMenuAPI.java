@@ -26,7 +26,8 @@ public class InventoryMenuAPI extends JavaPlugin {
         
         saveDefaultConfig();
         
-        Debug.log("Debugging is enabled. To disable, set the debug value in the "
+        if(getConfig().getBoolean("debug"))
+        	Debug.log("Debugging is enabled. To disable, set the debug value in the "
         		+ "InventoryMenuAPI config to false.");
         
         getServer().getPluginManager().registerEvents(new InventoryCloseListener(), this);
@@ -52,11 +53,15 @@ public class InventoryMenuAPI extends JavaPlugin {
      * @param player the player to show the InventoryMenu to
      */
     public void showInventoryMenu(Player player, InventoryMenu menu) {
-        handler.registerMenu(menu);
         
-        menu.addViewer(player);
+    	if(handler.registerMenu(menu))
+    		Debug.log("Registering menu: " + menu.getName());
+        
+       // menu.addViewer(player);
         
         player.openInventory(menu.getInventory());
+        
+        Debug.log("Showing InventoryMenu " + menu.getName() + " to " + player.getName() + ".");
     }
 
     /**
@@ -67,5 +72,9 @@ public class InventoryMenuAPI extends JavaPlugin {
     public void showInventoryMenu(Set<Player> players, InventoryMenu menu) {
         for(Player player : players)
             showInventoryMenu(player, menu);
+    }
+    
+    public MenuHandler getHandler() {
+    	return handler;
     }
 }
