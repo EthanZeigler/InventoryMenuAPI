@@ -1,8 +1,12 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI.menu;
 
 import edu.vccs.email.amm28053.inventoryMenuAPI.slot.AbstractSlot;
+import net.minecraft.server.v1_7_R1.NBTTagCompound;
+import net.minecraft.server.v1_7_R1.NBTTagList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_7_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -177,14 +181,16 @@ public class InventoryMenu {
 
 				if (slot != null) {
 					ItemStack item = new ItemStack(slot.getMaterial());
+
+					ItemMeta itemMeta = item.getItemMeta();
+					itemMeta.setDisplayName(slot.getId());
 					
-					if(!slot.getDescription().isEmpty()) {
-						ItemMeta itemMeta = item.getItemMeta();
-						itemMeta.setDisplayName(slot.getId());
+					if(slot.getDescription() != null)
 						itemMeta.setLore(slot.getDescription());
-						item.setItemMeta(itemMeta);
-					}
-					inventory.setItem(i, item);
+
+					item.setItemMeta(itemMeta);
+					
+					inventory.setItem(i, removeAttributes(item));
 				}
 			}
 
@@ -194,6 +200,29 @@ public class InventoryMenu {
 		return inventory;
 	}
 
+    private static ItemStack removeAttributes(ItemStack i) {
+        if(i == null) {
+            return i;
+        }
+        if(i.getType() == Material.BOOK_AND_QUILL) {
+            return i;
+        }
+        ItemStack item = i.clone();
+        net.minecraft.server.v1_7_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        NBTTagCompound tag;
+        if(!nmsStack.hasTag()) {
+            tag = new NBTTagCompound();
+            nmsStack.setTag(tag);
+        }
+        else {
+            tag = nmsStack.getTag();
+        }
+        NBTTagList am = new NBTTagList();
+        tag.set("AttributeModifiers", am);
+        nmsStack.setTag(tag);
+        return CraftItemStack.asCraftMirror(nmsStack);
+    }
+	
 	@Override
 	public boolean equals(Object other) {
 		if (this == other)

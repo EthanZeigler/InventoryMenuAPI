@@ -1,9 +1,10 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI.slot;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,8 +19,6 @@ public abstract class AbstractSlot {
     protected String description;
     protected boolean closeOnClick;
 
-    private final int MAX_CHARS_PER_LINE = 32;
-
     /**
      * Creates a slot with the String id specified
      *  and the default Material representation.
@@ -29,7 +28,6 @@ public abstract class AbstractSlot {
     public AbstractSlot(String id) {
         this.id = id;
         this.mat = Material.DIAMOND;
-        this.description = "";
         this.closeOnClick = true;
     }
 
@@ -76,22 +74,18 @@ public abstract class AbstractSlot {
      * @return the description of this slot as a list of strings
      */
     public List<String> getDescription() {
-        List<String> desc = new ArrayList<String>();
-
-        StringBuilder line = new StringBuilder();
-        int charsThisLine = 0;
-        for(String s : description.split(" ")) {
-            if(charsThisLine < MAX_CHARS_PER_LINE) {
-                line.append(s).append(" ");
-            } else {
-                desc.add(line.toString());
-                line = new StringBuilder(s);
-                charsThisLine = 0;
-            }
-        }
-        desc.add(line.toString());
-
-        return desc;
+        return description == null ? null : Arrays.asList(description.split("\n"));
+    }
+    
+    /**
+     * Set this AbstractSlot's description.
+     * 
+     * @param desc the description of this slot
+     * @return the AbstractSlot object
+     */
+    public AbstractSlot setDescription(String desc) {
+    	this.description = ChatColor.translateAlternateColorCodes('&', desc);
+    	return this;
     }
     
     /**
@@ -109,8 +103,10 @@ public abstract class AbstractSlot {
      * slot is clicked.
      * 
      * @param closeOnClick
+     * @return the AbstractSlot object
      */
-    public void setCloseOnClick(boolean closeOnClick) {
+    public AbstractSlot setCloseOnClick(boolean closeOnClick) {
     	this.closeOnClick = closeOnClick;
+    	return this;
     }
 }
