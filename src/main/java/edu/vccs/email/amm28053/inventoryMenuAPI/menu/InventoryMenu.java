@@ -79,12 +79,23 @@ public class InventoryMenu {
 	}
 
 	/**
-	 * Gets the all the slots in the InventoryMenu
+	 * Package private method to get all the slots
+	 * in the menu.
 	 * 
-	 * @return a set of all the slots
+	 * @return a list of all the slots
 	 */
-	public List<AbstractSlot> getSlots() {
+	List<AbstractSlot> getSlots() {
 		return new ArrayList<AbstractSlot>(this.slots);
+	}
+	
+	/**
+	 * Gets the AbstractSlot in the specific slot number.
+	 * 
+	 * @param slotNum
+	 * @return
+	 */
+	public AbstractSlot getSlot(int slotNum) {
+		return (slots.size() <= slotNum) || (slotNum < 0) ? null : slots.get(slotNum);
 	}
 
 	/**
@@ -166,10 +177,13 @@ public class InventoryMenu {
 
 				if (slot != null) {
 					ItemStack item = new ItemStack(slot.getMaterial());
-					ItemMeta itemMeta = item.getItemMeta();
-					itemMeta.setDisplayName(slot.getId());
-					itemMeta.setLore(slot.getDescription());
-					item.setItemMeta(itemMeta);
+					
+					if(!slot.getDescription().isEmpty()) {
+						ItemMeta itemMeta = item.getItemMeta();
+						itemMeta.setDisplayName(slot.getId());
+						itemMeta.setLore(slot.getDescription());
+						item.setItemMeta(itemMeta);
+					}
 					inventory.setItem(i, item);
 				}
 			}

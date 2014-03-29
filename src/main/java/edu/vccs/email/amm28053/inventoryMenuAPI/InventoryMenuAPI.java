@@ -2,6 +2,7 @@ package edu.vccs.email.amm28053.inventoryMenuAPI;
 
 import java.util.Collection;
 
+import edu.vccs.email.amm28053.inventoryMenuAPI.listeners.InventoryClickListener;
 import edu.vccs.email.amm28053.inventoryMenuAPI.listeners.InventoryCloseListener;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.InventoryMenu;
 import edu.vccs.email.amm28053.inventoryMenuAPI.menu.MenuHandler;
@@ -31,6 +32,7 @@ public class InventoryMenuAPI extends JavaPlugin {
         		+ "InventoryMenuAPI config to false.");
         
         getServer().getPluginManager().registerEvents(new InventoryCloseListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
     }
 
     @Override

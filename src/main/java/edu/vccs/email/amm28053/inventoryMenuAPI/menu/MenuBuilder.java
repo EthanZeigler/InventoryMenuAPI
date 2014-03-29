@@ -34,9 +34,8 @@ public class MenuBuilder {
      * @param name the name of the InventoryMenu
      */
     public MenuBuilder(Plugin owner, String name) {
-        this.owner = owner;
+        this(owner);
         this.name = name;
-        this.slots = new ArrayList<AbstractSlot>();
     }
 
     /**
@@ -84,21 +83,11 @@ public class MenuBuilder {
      * Adds an AbstractSlot to the first available element
      *  in the InventoryMenu.
      * @param slot the AbstractSlot being added
-     * @return true if successfully added
+     * @return the AbstractSlot object added
      */
-    public boolean addSlot(AbstractSlot slot) {
-        return slots.add(slot);
-    }
-
-    /**
-     * Adds an AbstractSlot at the specified index.
-     *
-     * @param index the index of the inventory slot where this
-     *              AbstractSlot is being added
-     * @param slot the AbstractSlot being added
-     */
-    public void addSlot(int index, AbstractSlot slot) {
-        slots.add(index, slot);
+    public AbstractSlot addSlot(AbstractSlot slot) {
+        slots.add(slot);
+        return slot;
     }
 
     /**
@@ -106,10 +95,10 @@ public class MenuBuilder {
      *  it exists.
      *
      * @param slot the AbstractSlot to be removed
-     * @return true if successfully removed
+     * @return true is slot removed
      */
     public boolean removeSlot(AbstractSlot slot) {
-        return slots.remove(slot);
+    	return slots.remove(slot);
     }
 
     /**
@@ -117,12 +106,13 @@ public class MenuBuilder {
      *  InventoryView, if there is a match.
      *
      * @param slotName the name of the AbstractSlot to be removed
-     * @return true if successfully removed
+     * @return true if slot removed
      */
     public boolean removeSlot(String slotName) {
         for(AbstractSlot slot : slots) {
-            if(slot.getId().equalsIgnoreCase(slotName))
-                return slots.remove(slot);
+            if(slot.getId().equalsIgnoreCase(slotName)) {
+                return removeSlot(slot);
+            }
         }
         return false;
     }
@@ -131,10 +121,10 @@ public class MenuBuilder {
      * Removes the AbstractSlot at the specified index.
      *
      * @param slot the index of the AbstractSlot to be removed
-     * @return true if successfully removed
+     * @return true if slot removed
      */
     public boolean removeSlot(int slot) {
-        return slots.remove(slot) != null;
+        return slots.remove(slot) != null ? true : false;
     }
 
     /**

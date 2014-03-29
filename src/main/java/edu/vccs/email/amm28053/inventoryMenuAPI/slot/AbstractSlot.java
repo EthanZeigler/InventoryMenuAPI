@@ -16,6 +16,7 @@ public abstract class AbstractSlot {
     protected String id;
     protected Material mat;
     protected String description;
+    protected boolean closeOnClick;
 
     private final int MAX_CHARS_PER_LINE = 32;
 
@@ -29,6 +30,7 @@ public abstract class AbstractSlot {
         this.id = id;
         this.mat = Material.DIAMOND;
         this.description = "";
+        this.closeOnClick = true;
     }
 
     /**
@@ -71,7 +73,7 @@ public abstract class AbstractSlot {
      * Get the description of this slot as
      *  a List of Strings.
      *
-     * @return
+     * @return the description of this slot as a list of strings
      */
     public List<String> getDescription() {
         List<String> desc = new ArrayList<String>();
@@ -90,5 +92,25 @@ public abstract class AbstractSlot {
         desc.add(line.toString());
 
         return desc;
+    }
+    
+    /**
+     * Returns whether the menu closes automatically when this
+     * slot is clicked.
+     * 
+     * @return true if the menu closes when a slot is clicked.
+     */
+    public boolean closeOnClick() {
+    	return this.closeOnClick;
+    }
+    
+    /**
+     * Sets whether the menu closes automatically when this
+     * slot is clicked.
+     * 
+     * @param closeOnClick
+     */
+    public void setCloseOnClick(boolean closeOnClick) {
+    	this.closeOnClick = closeOnClick;
     }
 }
