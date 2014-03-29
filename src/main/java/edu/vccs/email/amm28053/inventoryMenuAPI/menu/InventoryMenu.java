@@ -1,12 +1,12 @@
 package edu.vccs.email.amm28053.inventoryMenuAPI.menu;
 
 import edu.vccs.email.amm28053.inventoryMenuAPI.slot.AbstractSlot;
-import net.minecraft.server.v1_7_R1.NBTTagCompound;
-import net.minecraft.server.v1_7_R1.NBTTagList;
+import net.minecraft.server.v1_7_R2.NBTTagCompound;
+import net.minecraft.server.v1_7_R2.NBTTagList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_7_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_7_R2.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -208,7 +208,7 @@ public class InventoryMenu {
             return i;
         }
         ItemStack item = i.clone();
-        net.minecraft.server.v1_7_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_7_R2.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound tag;
         if(!nmsStack.hasTag()) {
             tag = new NBTTagCompound();
