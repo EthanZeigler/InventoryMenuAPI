@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * The InventoryMenuAPI plugin main class.
- *
+ * 
  * @author Alex Marshall
  */
 public class InventoryMenuAPI extends JavaPlugin {
@@ -23,16 +23,16 @@ public class InventoryMenuAPI extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        handler = new MenuHandler();
-        
-        saveDefaultConfig();
-        
-        if(getConfig().getBoolean("debug"))
-        	Debug.log("Debugging is enabled. To disable, set the debug value in the "
-        		+ "InventoryMenuAPI config to false.");
-        
-        getServer().getPluginManager().registerEvents(new InventoryCloseListener(), this);
-        getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
+	handler = new MenuHandler();
+
+	saveDefaultConfig();
+
+	if (getConfig().getBoolean("debug"))
+	    Debug.log("Debugging is enabled. To disable, set the debug value in the "
+		    + "InventoryMenuAPI config to false.");
+
+	getServer().getPluginManager().registerEvents(new InventoryCloseListener(), this);
+	getServer().getPluginManager().registerEvents(new InventoryClickListener(), this);
     }
 
     @Override
@@ -42,41 +42,43 @@ public class InventoryMenuAPI extends JavaPlugin {
 
     /**
      * Static method to get the InventoryMenuAPI plugin instance.
-     *
+     * 
      * @return instance of InventoryMenuAPI plugin
      */
     public static InventoryMenuAPI getInstance() {
-        return (InventoryMenuAPI) Bukkit.getPluginManager().getPlugin("InventoryMenuAPI");
+	return (InventoryMenuAPI) Bukkit.getPluginManager().getPlugin("InventoryMenuAPI");
     }
 
     /**
      * Show an InventoryMenu to a Player.
-     *
-     * @param player the player to show the InventoryMenu to
+     * 
+     * @param player
+     *            the player to show the InventoryMenu to
      */
-    private void showInventoryMenu(Player player, InventoryMenu menu) {
-        
-    	if(handler.registerMenu(menu))
-    		Debug.log("Registering menu: " + menu.getName());
-        
-    	menu.addViewer(player);
-        
-        player.openInventory(menu.getInventory());
-        
-        Debug.log("Showing InventoryMenu " + menu.getName() + " to " + player.getName() + ".");
+    public void showInventoryMenu(Player player, InventoryMenu menu) {
+
+	if (handler.registerMenu(menu))
+	    Debug.log("Registering menu: " + menu.getName());
+
+	menu.addViewer(player);
+
+	player.openInventory(menu.getInventory());
+
+	Debug.log("Showing InventoryMenu " + menu.getName() + " to " + player.getName() + ".");
     }
 
     /**
      * Show an InventoryMenu to a given set of Players.
-     *
-     * @param players the players to show the InventoryMenu to
+     * 
+     * @param players
+     *            the players to show the InventoryMenu to
      */
     public void showInventoryMenu(Collection<Player> players, InventoryMenu menu) {
-        for(Player player : players)
-            showInventoryMenu(player, menu);
+	for (Player player : players)
+	    showInventoryMenu(player, menu);
     }
-    
+
     public MenuHandler getHandler() {
-    	return handler;
+	return handler;
     }
 }

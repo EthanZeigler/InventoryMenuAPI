@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Abstract implementation of an inventory slot.
- *
+ * 
  * @author Alex Marshall (amhokies)
  */
 public abstract class AbstractSlot {
@@ -20,93 +20,93 @@ public abstract class AbstractSlot {
     protected boolean closeOnClick;
 
     /**
-     * Creates a slot with the String id specified
-     *  and the default Material representation.
-     *
-     *  @param id The String id of this slot.
+     * Creates a slot with the String id specified and the default Material
+     * representation.
+     * 
+     * @param id
+     *            The String id of this slot.
      */
     public AbstractSlot(String id) {
-        this.id = id;
-        this.mat = Material.DIAMOND;
-        this.closeOnClick = true;
+	this.id = ChatColor.translateAlternateColorCodes('&', id);
+	this.mat = Material.DIAMOND;
+	this.closeOnClick = true;
     }
 
     /**
-     * Creates a slot with the Material representation passed in
-     *  and the specified String id;
-     *
-     * @param id The String id of this slot.
-     * @param mat the material representation of this slot
+     * Creates a slot with the Material representation passed in and the
+     * specified String id;
+     * 
+     * @param id
+     *            The String id of this slot.
+     * @param mat
+     *            the material representation of this slot
      */
     public AbstractSlot(String id, Material mat) {
-        this(id);
-        this.mat= mat;
+	this(id);
+	this.mat = mat;
     }
 
     /**
-     * Method that will be executed when the slot is
-     *  clicked on.
+     * Method that will be executed when the slot is clicked on.
      */
     public abstract void execute(Player player);
 
     /**
      * Get the material representation of this slot.
-     *
+     * 
      * @return the material that represents this slot
      */
     public Material getMaterial() {
-        return this.mat;
+	return this.mat;
     }
 
     /**
      * Get the String id of this slot.
-     *
+     * 
      * @return the String identifier of this slot
      */
     public String getId() {
-        return this.id;
+	return this.id;
     }
 
     /**
-     * Get the description of this slot as
-     *  a List of Strings.
-     *
+     * Get the description of this slot as a List of Strings.
+     * 
      * @return the description of this slot as a list of strings
      */
     public List<String> getDescription() {
-        return description == null ? null : Arrays.asList(description.split("\n"));
+	return description == null ? null : Arrays.asList(description.split("_"));
     }
-    
+
     /**
      * Set this AbstractSlot's description.
      * 
-     * @param desc the description of this slot
+     * @param desc
+     *            the description of this slot
      * @return the AbstractSlot object
      */
     public AbstractSlot setDescription(String desc) {
-    	this.description = ChatColor.translateAlternateColorCodes('&', desc);
-    	return this;
+	this.description = ChatColor.translateAlternateColorCodes('&', desc);
+	return this;
     }
-    
+
     /**
-     * Returns whether the menu closes automatically when this
-     * slot is clicked.
+     * Returns whether the menu closes automatically when this slot is clicked.
      * 
      * @return true if the menu closes when a slot is clicked.
      */
     public boolean closeOnClick() {
-    	return this.closeOnClick;
+	return this.closeOnClick;
     }
-    
+
     /**
-     * Sets whether the menu closes automatically when this
-     * slot is clicked.
+     * Sets whether the menu closes automatically when this slot is clicked.
      * 
      * @param closeOnClick
      * @return the AbstractSlot object
      */
     public AbstractSlot setCloseOnClick(boolean closeOnClick) {
-    	this.closeOnClick = closeOnClick;
-    	return this;
+	this.closeOnClick = closeOnClick;
+	return this;
     }
 }

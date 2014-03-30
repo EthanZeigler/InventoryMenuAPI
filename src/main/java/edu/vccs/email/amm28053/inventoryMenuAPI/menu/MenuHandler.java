@@ -8,57 +8,56 @@ import java.util.Set;
 /**
  * @author Alex Marshall
  */
-public class MenuHandler
-{
+public class MenuHandler {
+
     private Set<InventoryMenu> openMenus;
 
     /**
-     * Creates a MenuHandler to store InventoryMenus that
-     *  are registered and waiting for input.
+     * Creates a MenuHandler to store InventoryMenus that are registered and
+     * waiting for input.
      */
-    public MenuHandler() 
-    {
-        openMenus = new HashSet<InventoryMenu>();
+    public MenuHandler() {
+	openMenus = new HashSet<InventoryMenu>();
     }
 
     /**
      * Registers an InventoryMenu that is currently open.
-     *
-     * @param menu the InventoryMenu to be registered
+     * 
+     * @param menu
+     *            the InventoryMenu to be registered
      * @return true if successfully registered
      */
-    public boolean registerMenu(InventoryMenu menu) 
-    {
-        Validate.isTrue(menu.getNumSlots() > 0, "InventoryMenu owned by [" + menu.getOwner().getName() + "]" +
-            " failed registration! Reason: Menu is empty!");
-        return openMenus.add(menu);
+    public boolean registerMenu(InventoryMenu menu) {
+	Validate.isTrue(menu.getNumSlots() > 0, "InventoryMenu owned by ["
+		+ menu.getOwner().getName() + "]" + " failed registration! Reason: Menu is empty!");
+	return openMenus.add(menu);
     }
-    
+
     /**
      * Unregisters an InventoryMenu after all instances are closed.
      * 
-     * @param menu the InventoryMenu being unregistered
+     * @param menu
+     *            the InventoryMenu being unregistered
      * @return true if successfully unregistered
      */
-    public boolean unregisterMenu(InventoryMenu menu) 
-    {
-    	return openMenus.remove(menu);
+    public boolean unregisterMenu(InventoryMenu menu) {
+	return openMenus.remove(menu);
     }
-    
+
     /**
-     * Returns an InventoryMenu with the name passed in.
-     * If there are no matches, returns null.
+     * Returns an InventoryMenu with the name passed in. If there are no
+     * matches, returns null.
      * 
-     * @param name the title of the InventoryMenu
+     * @param name
+     *            the title of the InventoryMenu
      * @return matched InventoryMenu or null if none found
      */
-    public InventoryMenu getMenu(String name) 
-    {
-    	for(InventoryMenu menu : openMenus) {
-    		if(menu.getName().equals(name)) {
-    			return menu;
-    		}
-    	}
-    	return null;
+    public InventoryMenu getMenu(String name) {
+	for (InventoryMenu menu : openMenus) {
+	    if (menu.getName().equals(name)) {
+		return menu;
+	    }
+	}
+	return null;
     }
 }
